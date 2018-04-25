@@ -17,7 +17,7 @@ class Run(models.Model):
     instrument_id = models.ForeignKey('Instrument', on_delete = models.PROTECT)
 
 class Lane(models.Model):
-    lane_num = models.IntegerField()
+    number = models.IntegerField()
     run_id = models.ForeignKey('Run', on_delete = models.CASCADE)
 
 class Sample(models.Model):
@@ -31,7 +31,7 @@ class Sample(models.Model):
     index2 = models.CharField(max_length=50, blank = True, null = True)
 
 class Read(models.Model):
-    read_num = models.IntegerField()
+    number = models.IntegerField()
     run_id = models.ForeignKey('Run', on_delete = models.CASCADE)
     lane_id = models.ForeignKey('Lane', on_delete = models.CASCADE)
     length = models.IntegerField(blank = True, null = True)
@@ -56,6 +56,8 @@ class AnalysisType(models.Model):
     name = models.CharField(max_length=100,
             choices = (('bcl2fastq', 'bcl2fastq'), ('fastqc', 'fastqc')),
             default = 'bcl2fastq')
+    class Meta:
+        db_table = 'analysis_type'
 
 class Analysis(models.Model):
     request_id = models.ForeignKey('Request', on_delete = models.PROTECT)
@@ -70,10 +72,12 @@ class Analysis(models.Model):
     pid = models.IntegerField(null = True)
     log = models.CharField(max_length=255, null = True)
 
-class Bcl2fastq_Sample_Analysis(models.Model):
+class Bcl2fastqSampleAnalysis(models.Model):
     analysis_id = models.ForeignKey('Analysis', on_delete = models.PROTECT)
     sample_id = models.ForeignKey('Sample', on_delete = models.PROTECT)
     date_created = models.DateTimeField(auto_now_add = True)
     date_modified = models.DateTimeField(auto_now = True)
     q30 = models.FloatField()
     cluster = models.IntegerField()
+    class Meta:
+        db_table = 'bcl2fastq_sample_analysis'
