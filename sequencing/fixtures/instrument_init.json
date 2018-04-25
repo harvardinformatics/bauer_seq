@@ -1,0 +1,37 @@
+[
+    {
+        "model": "sequencing.instrument",
+        "fields": {
+            "name": "D00742",
+            "type": "hiseq"
+        }
+    },
+    {
+        "model": "sequencing.instrument",
+        "fields": {
+            "name": "D00365",
+            "type": "hiseq"
+        }
+    },
+    {
+        "model": "sequencing.instrument",
+        "fields": {
+            "name": "NS500422",
+            "type": "nextseq"
+        }
+    },
+    {
+        "model": "sequencing.instrument",
+        "fields": {
+            "name": "NS502063",
+            "type": "nextseq"
+        }
+    },
+    {
+        "model": "sequencing.instrument",
+        "fields": {
+            "name": "NS501677",
+            "type": "nextseq"
+        }
+    }
+]

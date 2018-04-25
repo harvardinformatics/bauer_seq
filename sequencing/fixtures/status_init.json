@@ -1,0 +1,26 @@
+[
+    {
+        "model": "sequencing.status",
+        "fields": {
+            "name": "pending"
+        }
+    },
+    {
+        "model": "sequencing.status",
+        "fields": {
+            "name": "processing"
+        }
+    },
+    {
+        "model": "sequencing.status",
+        "fields": {
+            "name": "complete"
+        }
+    },
+    {
+        "model": "sequencing.status",
+        "fields": {
+            "name": "failed"
+        }
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "model": "sequencing.analysistype",
+        "fields": {
+            "name": "bcl2fastq"
+        }
+    },
+    {
+        "model": "sequencing.analysistype",
+        "fields": {
+            "name": "fastqc"
+        }
+    }
+]
