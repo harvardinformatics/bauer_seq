@@ -3,6 +3,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .views import *
 
 urlpatterns = {
+        url(r'^instruments/$', InstrumentCreate.as_view(), name='instrument create'),
         url(r'^runs/$', RunCreate.as_view(), name='run create'),
         url(r'^runs/(?P<pk>[0-9]+)/$', RunMod.as_view(), name='run modify'),
         url(r'^lanes/$', LaneCreate.as_view(), name='lane create'),
