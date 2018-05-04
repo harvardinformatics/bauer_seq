@@ -48,7 +48,7 @@ class Request(models.Model):
     run_id = models.ForeignKey('Run', on_delete = models.PROTECT)
     date_created = models.DateTimeField(auto_now_add = True)
     date_modified = models.DateTimeField(auto_now = True)
-    start_after = models.DateTimeField()
+    start_after = models.DateTimeField(auto_now = True)
     status_id = models.ForeignKey('Status', on_delete = models.PROTECT)
     requestor = models.CharField(max_length=100, blank = True, null = True)
 
