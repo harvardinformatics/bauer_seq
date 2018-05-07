@@ -5,6 +5,13 @@ from .models import *
 
 
 ''' API VIEWS '''
+class InstrumentCreate(generics.ListCreateAPIView):
+    queryset = Instrument.objects.all()
+    serializer_class = InstrumentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
 
 class RunCreate(generics.ListCreateAPIView):
     queryset = Run.objects.all()

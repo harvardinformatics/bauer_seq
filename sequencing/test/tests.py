@@ -1,9 +1,10 @@
 from django.test import TestCase
-from .models import Run, Instrument
+from sequencing.models import Run, Instrument
 from datetime import datetime, timedelta
 from rest_framework.test import APIClient
 from rest_framework import status
 from django.urls import reverse
+
 
 class RunModelTestCase(TestCase):
     """Test for Run model"""
@@ -37,7 +38,7 @@ class RunCreateTestCase(TestCase):
                 'instrument_id': instrument.id
         }
         self.response = self.client.post(
-                reverse('create'),
+                reverse('run create'),
                 self.data,
                 format='json')
         print(self.response.content)
