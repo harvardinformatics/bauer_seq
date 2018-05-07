@@ -17,7 +17,9 @@ COPY requirements.txt /app
 RUN pip install -r requirements.txt && \
     pip install gunicorn
 
-ADD . /app/
 ENV PYTHONPATH /app
 
-CMD ["/usr/bin/supervisord","-n"]
+CMD ["/app/manage.py","runserver", "0.0.0.0:80"]
+
+# If you want to test the production setup
+# CMD ["/usr/bin/supervisord","-n"]
