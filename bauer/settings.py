@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = priv.SECRET_KEY
+SECRET_KEY = os.environ['BAUER_DJANGO_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,7 +77,20 @@ WSGI_APPLICATION = 'wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-DATABASES = priv.DATABASES
+DATABASES =  {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['BAUER_DATABASE'],
+        'USER': os.environ['BAUER_USERNAME'],
+        'PASSWORD': os.environ['BAUER_PASSWORD'],
+        'HOST': os.environ['BAUER_HOSTNAME'],
+        'PORT': '3306',
+        'OPTIONS':
+        {
+            'init_command': 'SET default_storage_engine=MyISAM;'
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
