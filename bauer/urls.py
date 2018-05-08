@@ -18,7 +18,7 @@ from django.urls import path, include
 from rest_framework.authtoken import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('sequencing/', include('sequencing.urls')),
-    path('get_auth_token/', views.obtain_auth_token)
+    path('bauer/admin/', admin.site.urls),
+    path('bauer/sequencing/', include('sequencing.urls')),
+    path('bauer/get_auth_token/', views.obtain_auth_token)
 ]
