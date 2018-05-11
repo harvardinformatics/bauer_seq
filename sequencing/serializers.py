@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from .models import *
 
 class InstrumentSerializer(serializers.ModelSerializer):
@@ -9,6 +10,8 @@ class InstrumentSerializer(serializers.ModelSerializer):
 class RunSerializer(serializers.ModelSerializer):
     instrument = serializers.SlugRelatedField(slug_field = 'name',
             queryset=Instrument.objects.all())
+    name = serializers.CharField(source='run.name', validators=[UniqueValidator(queryset=Run.objects.all())])
+
     class Meta:
         model = Run
         fields = ('id', 'name', 'flowcell', 'lot', 'expiration', 'instrument')
