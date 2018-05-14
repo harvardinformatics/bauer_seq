@@ -10,7 +10,7 @@ class InstrumentSerializer(serializers.ModelSerializer):
 class RunSerializer(serializers.ModelSerializer):
     instrument = serializers.SlugRelatedField(slug_field = 'name',
             queryset=Instrument.objects.all())
-    name = serializers.CharField(source='run.name', validators=[UniqueValidator(queryset=Run.objects.all())])
+    name = serializers.CharField(validators=[UniqueValidator(queryset=Run.objects.all())])
 
     class Meta:
         model = Run
