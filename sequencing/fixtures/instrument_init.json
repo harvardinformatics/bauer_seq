@@ -23,14 +23,14 @@
     {
         "model": "sequencing.instrument",
         "fields": {
-            "name": "NS502063",
+            "name": "NB502063",
             "type": "nextseq"
         }
     },
     {
         "model": "sequencing.instrument",
         "fields": {
-            "name": "NS501677",
+            "name": "NB501677",
             "type": "nextseq"
         }
     }
