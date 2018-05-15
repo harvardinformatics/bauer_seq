@@ -7,6 +7,11 @@ class Instrument(models.Model):
             choices = (('nextseq', 'nextseq'), ('hiseq', 'hiseq')),
             default = 'nextseq')
 
+class RunType(models.Model):
+    name = models.CharField(max_length=100)
+    class Meta:
+        db_table = 'sequencing_run_type'
+
 class Run(models.Model):
     name = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add = True)
@@ -15,6 +20,8 @@ class Run(models.Model):
     lot = models.CharField(max_length=100, blank = True, null = True)
     expiration = models.DateField(blank = True, null = True)
     instrument = models.ForeignKey('Instrument', on_delete = models.PROTECT)
+    run_type = models.ForeignKey('RunType', on_delete = models.PROTECT,
+            null=True)
 
 class Lane(models.Model):
     number = models.IntegerField()
@@ -79,4 +86,4 @@ class Bcl2fastqSampleAnalysis(models.Model):
     q30 = models.FloatField()
     cluster = models.IntegerField()
     class Meta:
-        db_table = 'bcl2fastq_sample_analysis'
+        db_table = 'sequencing_bcl2fastq_sample_analysis'

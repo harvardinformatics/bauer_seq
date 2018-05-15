@@ -1,0 +1,74 @@
+[
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "genomic"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "RRBS"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "10x genome"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "10x single cell"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "indrop"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "RNA-seq"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "ATAC-seq"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "ChIP-seq"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "RAD-seq"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "amplicon"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "shotgun metagenomics"
+        }
+    },
+    {
+        "model": "sequencing.runtype",
+        "fields": {
+            "name": "Other"
+        }
+    }
+]
