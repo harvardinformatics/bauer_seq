@@ -7,10 +7,10 @@ class Instrument(models.Model):
             choices = (('nextseq', 'nextseq'), ('hiseq', 'hiseq')),
             default = 'nextseq')
 
-class RunType(models.Model):
+class SampleType(models.Model):
     name = models.CharField(max_length=100)
     class Meta:
-        db_table = 'sequencing_run_type'
+        db_table = 'sequencing_sample_type'
 
 class Run(models.Model):
     name = models.CharField(max_length=100)
@@ -20,8 +20,6 @@ class Run(models.Model):
     lot = models.CharField(max_length=100, blank = True, null = True)
     expiration = models.DateField(blank = True, null = True)
     instrument = models.ForeignKey('Instrument', on_delete = models.PROTECT)
-    run_type = models.ForeignKey('RunType', on_delete = models.PROTECT,
-            null=True)
 
 class Lane(models.Model):
     number = models.IntegerField()
@@ -36,6 +34,8 @@ class Sample(models.Model):
     description = models.CharField(max_length=100)
     index1 = models.CharField(max_length=50, blank = True, null = True)
     index2 = models.CharField(max_length=50, blank = True, null = True)
+    sample_type = models.ForeignKey('SampleType', on_delete = models.PROTECT,
+            null=True)
 
 class Read(models.Model):
     number = models.IntegerField()

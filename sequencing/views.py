@@ -12,9 +12,9 @@ class InstrumentCreate(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save()
 
-class RunTypeCreate(generics.ListCreateAPIView):
-    queryset = RunType.objects.all()
-    serializer_class = RunTypeSerializer
+class SampleTypeCreate(generics.ListCreateAPIView):
+    queryset = SampleType.objects.all()
+    serializer_class = SampleTypeSerializer
 
     def perform_create(self, serializer):
         serializer.save()
