@@ -2,7 +2,22 @@ from django.shortcuts import render
 from rest_framework import generics
 from .serializers import *
 from .models import *
+from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic.edit import CreateView
 
+class RequestList(ListView):
+    model = Request
+
+class RequestCreateForm(CreateView):
+    model = Request
+    fields = '__all__'
+
+class RequestEditForm(UpdateView):
+    model = Request
+    fields = '__all__'
+
+class RequestDetail(DetailView):
+    model = Request
 
 ''' API VIEWS '''
 class InstrumentCreate(generics.ListCreateAPIView):

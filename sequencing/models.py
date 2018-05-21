@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Instrument(models.Model):
@@ -57,6 +58,12 @@ class Request(models.Model):
     start_after = models.DateTimeField(auto_now = True)
     status = models.ForeignKey('Status', on_delete = models.PROTECT)
     requestor = models.CharField(max_length=100, blank = True, null = True)
+
+    def get_absolute_url(self):
+        return reverse('request detail', kwargs={'pk': self.pk})
+
+    def get_edit_url(self):
+        return reverse('request edit', kwargs={'pk': self.pk})
 
 class AnalysisType(models.Model):
     name = models.CharField(max_length=100,

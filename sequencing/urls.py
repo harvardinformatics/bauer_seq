@@ -3,6 +3,12 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .views import *
 
 urlpatterns = {
+        url(r'^create_request/$', RequestCreateForm.as_view(), name='create request'),
+        url(r'^edit_request/(?P<pk>\d+)/$', RequestEditForm.as_view(), name='request edit'),
+        url(r'^request_detail/(?P<pk>\d+)/$', RequestDetail.as_view(), name='request detail'),
+        url(r'^request_list/$', RequestList.as_view(), name='request list'),
+
+        # below are all the API endpoints
         url(r'^instruments/$', InstrumentCreate.as_view(), name='instrument create'),
         url(r'^sample_types/$', SampleTypeCreate.as_view(), name='sample type create'),
         url(r'^runs/$', RunCreate.as_view(), name='run create'),

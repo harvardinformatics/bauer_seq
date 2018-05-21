@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Request Queue</h2>
+    <table>
+        <tr>
+            <th>Run</th>
+            <th>Date Created</th>
+            <th>Date Modified</th>
+            <th>Start After</th>
+            <th>Requestor</th>
+            <th>Status</th>
+        </tr>
+        {% for req in object_list %}
+        <tr>
+            <td><a href="{{ req.get_absolute_url }}">{{req.run.name}}</a></td>
+            <td>{{req.date_created}}</td>
+            <td>{{req.date_modified}}</td>
+            <td>{{req.start_after}}</td>
+            <td>{{req.requestor}}</td>
+            <td>{{req.status.name}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

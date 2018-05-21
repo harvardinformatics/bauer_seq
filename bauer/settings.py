@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_nose',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'bootstrap3'
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'bauer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +72,8 @@ TEMPLATES = [
         },
     },
 ]
+
+BOOTSTRAP3 = {'theme_url': '/bauer/static/flatly_bootstrap.min.css',}
 
 WSGI_APPLICATION = 'wsgi.application'
 
@@ -129,7 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/bauer/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles/'), )
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': (
