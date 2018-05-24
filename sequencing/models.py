@@ -59,11 +59,11 @@ class Request(models.Model):
     status = models.ForeignKey('Status', on_delete = models.PROTECT)
     requestor = models.CharField(max_length=100, blank = True, null = True)
 
-    def get_absolute_url(self):
-        return reverse('request detail', kwargs={'pk': self.pk})
+    def get_detail_url(self):
+        return reverse('request_detail', kwargs={'pk': self.pk})
 
     def get_edit_url(self):
-        return reverse('request edit', kwargs={'pk': self.pk})
+        return reverse('request_edit', kwargs={'pk': self.pk})
 
 class AnalysisType(models.Model):
     name = models.CharField(max_length=100,
