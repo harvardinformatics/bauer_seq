@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-
+{% block title %}
+Request Queue
+{% endblock %}
 {% block content %}
-    <h2>Request Queue</h2>
     <table>
         <tr>
             <th>Run</th>
@@ -13,7 +14,7 @@
         </tr>
         {% for req in object_list %}
         <tr>
-            <td><a href="{{ req.get_absolute_url }}">{{req.run.name}}</a></td>
+            <td><a href="{{ req.get_detail_url }}">{{req.run.name}}</a></td>
             <td>{{req.date_created}}</td>
             <td>{{req.date_modified}}</td>
             <td>{{req.start_after}}</td>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
+{% block title %}Request {{object.id}}{% endblock %}
 {% block content %}
-<h2>Request {{object.id}}</h2>
     <table>
         <tr><td>Run</td><td>{{object.run.name}}</td></tr>
         <tr><td>Date </td><td>{{object.start_after}}</td></tr>
