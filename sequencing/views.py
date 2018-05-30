@@ -19,6 +19,19 @@ class RequestEditForm(UpdateView):
 class RequestDetail(DetailView):
     model = Request
 
+class SampleDetail(DetailView):
+    model = Sample
+
+class SampleEditForm(UpdateView):
+    model = Sample
+    fields = '__all__'
+
+class RunList(ListView):
+    model = Run
+
+class RunDetail(DetailView):
+    model = Run
+
 ''' API VIEWS '''
 class InstrumentCreate(generics.ListCreateAPIView):
     queryset = Instrument.objects.all()

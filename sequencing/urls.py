@@ -7,6 +7,10 @@ urlpatterns = {
         url(r'^request/edit/(?P<pk>\d+)/$', RequestEditForm.as_view(), name='request_edit'),
         url(r'^request/(?P<pk>\d+)/$', RequestDetail.as_view(), name='request_detail'),
         url(r'^requests/$', RequestList.as_view(), name='request_list'),
+        url(r'^sample/(?P<pk>\d+)/$', SampleDetail.as_view(), name='sample_detail'),
+        url(r'^sample/edit/(?P<pk>\d+)/$', SampleEditForm.as_view(), name='sample_edit'),
+        url(r'^runs/$', RunList.as_view(), name='run_list'),
+        url(r'^run/(?P<pk>\d+)/$', RunDetail.as_view(), name='run_detail'),
 
         # below are all the API endpoints
         url(r'^api/instruments/$', InstrumentCreate.as_view(), name='api_instrument_create'),

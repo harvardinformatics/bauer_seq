@@ -22,6 +22,9 @@ class Run(models.Model):
     expiration = models.DateField(blank = True, null = True)
     instrument = models.ForeignKey('Instrument', on_delete = models.PROTECT)
 
+    def get_detail_url(self):
+        return reverse('run_detail', kwargs={'pk': self.pk})
+
 class Lane(models.Model):
     number = models.IntegerField()
     run = models.ForeignKey('Run', on_delete = models.CASCADE)
@@ -37,6 +40,12 @@ class Sample(models.Model):
     index2 = models.CharField(max_length=50, blank = True, null = True)
     sample_type = models.ForeignKey('SampleType', on_delete = models.PROTECT,
             null=True)
+
+    def get_detail_url(self):
+        return reverse('sample_detail', kwargs={'pk': self.pk})
+
+    def get_edit_url(self):
+        return reverse('sample_edit', kwargs={'pk': self.pk})
 
 class Read(models.Model):
     number = models.IntegerField()
