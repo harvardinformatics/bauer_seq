@@ -15,7 +15,7 @@ Runs
         </tr>
         {% for obj in object_list %}
         <tr>
-            <td><a href="{{ obj.get_detail_url }}">{{obj.name}}</a></td>
+            <td><a href="{{ obj.get_absolute_url }}">{{obj.name}}</a></td>
             <td>{{obj.date_created}}</td>
             <td>{{obj.date_modified}}</td>
             <td>{{obj.flowcell}}</td>

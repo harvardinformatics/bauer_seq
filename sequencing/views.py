@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .serializers import *
 from .models import *
+from .forms import *
 from django.views.generic import ListView, DetailView, UpdateView
 from django.views.generic.edit import CreateView
 
@@ -22,15 +23,27 @@ class RequestDetail(DetailView):
 class SampleDetail(DetailView):
     model = Sample
 
-class SampleEditForm(UpdateView):
-    model = Sample
-    fields = '__all__'
-
 class RunList(ListView):
     model = Run
 
 class RunDetail(DetailView):
     model = Run
+
+def sample_edit(request, pk = None):
+    '''form = None
+    if request.method == 'POST':
+        try:
+            if pk is None:
+                form = SampleEditModelForm(request.POST)
+            else:
+                instance = Sample.objects.get(pk=pk)
+                form = SampleEditModelForm(request.POST, instance = instance)'''
+    instance = Sample.objects.get(pk=pk)
+    #form = SampleEditModelForm(sam=instance, instance=instance)
+    form = SampleEditForm()
+    #form.fields['lane'].queryset = Lane.objects.filter(run=instance.run)
+    context = {'form': form}
+    return render(request, 'sequencing/sample_form.html', context)
 
 ''' API VIEWS '''
 class InstrumentCreate(generics.ListCreateAPIView):

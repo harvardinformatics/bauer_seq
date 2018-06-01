@@ -13,6 +13,9 @@ class SampleType(models.Model):
     class Meta:
         db_table = 'sequencing_sample_type'
 
+    def __str__(self):
+        return self.name
+
 class Run(models.Model):
     name = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add = True)
@@ -22,12 +25,18 @@ class Run(models.Model):
     expiration = models.DateField(blank = True, null = True)
     instrument = models.ForeignKey('Instrument', on_delete = models.PROTECT)
 
-    def get_detail_url(self):
+    def get_absolute_url(self):
         return reverse('run_detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return self.name
 
 class Lane(models.Model):
     number = models.IntegerField()
     run = models.ForeignKey('Run', on_delete = models.CASCADE)
+
+    def __str__(self):
+        return str(self.number)
 
 class Sample(models.Model):
     name = models.CharField(max_length=100)
@@ -41,7 +50,7 @@ class Sample(models.Model):
     sample_type = models.ForeignKey('SampleType', on_delete = models.PROTECT,
             null=True)
 
-    def get_detail_url(self):
+    def get_absolute_url(self):
         return reverse('sample_detail', kwargs={'pk': self.pk})
 
     def get_edit_url(self):
@@ -68,7 +77,7 @@ class Request(models.Model):
     status = models.ForeignKey('Status', on_delete = models.PROTECT)
     requestor = models.CharField(max_length=100, blank = True, null = True)
 
-    def get_detail_url(self):
+    def get_absolute_url(self):
         return reverse('request_detail', kwargs={'pk': self.pk})
 
     def get_edit_url(self):
