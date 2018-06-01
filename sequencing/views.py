@@ -29,22 +29,6 @@ class RunList(ListView):
 class RunDetail(DetailView):
     model = Run
 
-def sample_edit(request, pk = None):
-    '''form = None
-    if request.method == 'POST':
-        try:
-            if pk is None:
-                form = SampleEditModelForm(request.POST)
-            else:
-                instance = Sample.objects.get(pk=pk)
-                form = SampleEditModelForm(request.POST, instance = instance)'''
-    instance = Sample.objects.get(pk=pk)
-    #form = SampleEditModelForm(sam=instance, instance=instance)
-    form = SampleEditForm()
-    #form.fields['lane'].queryset = Lane.objects.filter(run=instance.run)
-    context = {'form': form}
-    return render(request, 'sequencing/sample_form.html', context)
-
 ''' API VIEWS '''
 class InstrumentCreate(generics.ListCreateAPIView):
     queryset = Instrument.objects.all()

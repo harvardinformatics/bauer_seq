@@ -25,7 +25,7 @@
         </tr>
         {% for sam in object.sample_set.all %}
         <tr>
-            <td><a href="{{ sam.get_detail_url }}">{{sam.name}}</a></td>
+            <td><a href="{{ sam.get_absolute_url }}">{{sam.name}}</a></td>
             <td>{{sam.date_created}}</td>
             <td>{{sam.date_modified}}</td>
             <td>{{sam.description}}</td>
