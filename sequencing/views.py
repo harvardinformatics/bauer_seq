@@ -54,6 +54,7 @@ class RunCreate(generics.ListCreateAPIView):
 class RunMod(generics.RetrieveUpdateDestroyAPIView):
     queryset = Run.objects.all()
     serializer_class = RunSerializer
+    lookup_field = 'name'
 
 class LaneCreate(generics.ListCreateAPIView):
     queryset = Lane.objects.all()

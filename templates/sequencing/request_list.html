@@ -3,24 +3,29 @@
 Request Queue
 {% endblock %}
 {% block content %}
-    <table>
-        <tr>
-            <th>Run</th>
-            <th>Date Created</th>
-            <th>Date Modified</th>
-            <th>Start After</th>
-            <th>Requestor</th>
-            <th>Status</th>
-        </tr>
+<div id='req'>
+    <p>[[ title ]]</p>
+    <md-table>
+        <md-table-row>
+            <md-table-head>Run</md-table-head>
+            <md-table-head>Date Created</md-table-head>
+            <md-table-head>Date Modified</md-table-head>
+            <md-table-head>Start After</md-table-head>
+            <md-table-head>Requestor</md-table-head>
+            <md-table-head>Status</md-table-head>
+        </md-table-row>
         {% for req in object_list %}
-        <tr>
-            <td><a href="{{ req.get_absolute_url }}">{{req.run.name}}</a></td>
-            <td>{{req.date_created}}</td>
-            <td>{{req.date_modified}}</td>
-            <td>{{req.start_after}}</td>
-            <td>{{req.requestor}}</td>
-            <td>{{req.status.name}}</td>
-        </tr>
+        <md-table-row>
+            <md-table-cell><a href="{{ req.get_absolute_url }}">{{req.run.name}}</a></md-table-cell>
+            <md-table-cell>{{req.date_created}}</md-table-cell>
+            <md-table-cell>{{req.date_modified}}</md-table-cell>
+            <md-table-cell>{{req.start_after}}</md-table-cell>
+            <md-table-cell>{{req.requestor}}</md-table-cell>
+            <md-table-cell>{{req.status.name}}</md-table-cell>
+        </md-table-row>
         {% endfor %}
-    </table>
+    </md-table>
+</div>
+
+
 {% endblock %}

@@ -40,7 +40,7 @@ class Lane(models.Model):
 
 class Sample(models.Model):
     name = models.CharField(max_length=100)
-    run = models.ForeignKey('Run', on_delete = models.PROTECT)
+    run = models.ForeignKey('Run', on_delete = models.PROTECT, related_name = 'run_samples')
     lane = models.ForeignKey('Lane', on_delete = models.PROTECT)
     date_created = models.DateTimeField(auto_now_add = True)
     date_modified = models.DateTimeField(auto_now = True)

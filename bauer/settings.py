@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django_nose',
     'rest_framework',
     'rest_framework.authtoken',
-    'bootstrap3'
+    'webpack_loader',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'bauer.urls'
@@ -72,8 +76,6 @@ TEMPLATES = [
         },
     },
 ]
-
-BOOTSTRAP3 = {'theme_url': '/bauer/static/flatly_bootstrap.min.css',}
 
 WSGI_APPLICATION = 'wsgi.application'
 
@@ -135,11 +137,23 @@ STATIC_URL = '/bauer/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles/'), )
 
-REST_FRAMEWORK = {
+'''REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'rest_framework.authentication.TokenAuthentication',
         ),
         'DEFAULT_PERMISSION_CLASSES': (
             'rest_framework.permissions.IsAuthenticated',
         )
+}'''
+
+WEBPACK_LOADER = {
+        'DEFAULT': {
+            'BUNDLE_DIR_NAME': '',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
+        }
 }
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+        'http//:localhost:8080'
+)

@@ -12,29 +12,31 @@ class SampleTypeSerializer(serializers.ModelSerializer):
         model = SampleType
         fields = ('id', 'name')
 
+class SampleSerializer(serializers.ModelSerializer):
+    sample_type = serializers.SlugRelatedField(slug_field = 'name',
+            queryset=SampleType.objects.all(), required = False)
+    class Meta:
+        model = Sample
+        fields = ('id', 'date_modified', 'date_created', 'name', 'run', 'lane', 'description', 'index1',
+        'index2', 'sample_type')
+        read_only_fields = ('date_created', 'date_modified')
+
 class RunSerializer(serializers.ModelSerializer):
     instrument = serializers.SlugRelatedField(slug_field = 'name',
             queryset=Instrument.objects.all())
     name = serializers.CharField(validators=[UniqueValidator(queryset=Run.objects.all())])
+    run_samples = SampleSerializer(many=True)
 
     class Meta:
         model = Run
-        fields = ('id', 'name', 'flowcell', 'lot', 'expiration', 'instrument')
+        fields = ('id', 'name', 'flowcell', 'lot', 'expiration', 'instrument',
+        'date_created', 'date_modified', 'run_samples')
         read_only_fields = ('date_created', 'date_modified')
 
 class LaneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lane
         fields = ('id', 'number', 'run')
-
-class SampleSerializer(serializers.ModelSerializer):
-    sample_type = serializers.SlugRelatedField(slug_field = 'name',
-            queryset=SampleType.objects.all(), required = False)
-    class Meta:
-        model = Sample
-        fields = ('id', 'name', 'run', 'lane', 'description', 'index1',
-        'index2', 'sample_type')
-        read_only_fields = ('date_created', 'date_modified')
 
 class ReadSerializer(serializers.ModelSerializer):
     class Meta:
