@@ -8,7 +8,6 @@ import 'vue-material/dist/vue-material.min.css'
 
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
-//Vue.use(axios)
 
 /* eslint-disable no-new */
 new Vue({

@@ -21,6 +21,7 @@ urlpatterns = {
         url(r'^api/lanes/(?P<pk>[0-9]+)/$', LaneMod.as_view(), name='api_lane_modify'),
         url(r'^api/samples/$', SampleCreate.as_view(), name='api_sample_create'),
         url(r'^api/samples/(?P<pk>[0-9]+)/$', SampleMod.as_view(), name='api_sample_modify'),
+        url(r'^api/sample_types/$', SampleTypeCreate.as_view(), name='api_sample_type_create'),
         url(r'^api/reads/$', ReadCreate.as_view(), name='api_read_create'),
         url(r'^api/reads/(?P<pk>[0-9]+)/$', ReadMod.as_view(), name='api_read_modify'),
         url(r'^api/requests/$', RequestCreate.as_view(), name='api_request_create'),

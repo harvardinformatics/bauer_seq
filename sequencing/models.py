@@ -33,7 +33,7 @@ class Run(models.Model):
 
 class Lane(models.Model):
     number = models.IntegerField()
-    run = models.ForeignKey('Run', on_delete = models.CASCADE)
+    run = models.ForeignKey('Run', on_delete = models.CASCADE, related_name = 'run_lanes')
 
     def __str__(self):
         return str(self.number)

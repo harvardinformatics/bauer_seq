@@ -1,28 +1,24 @@
 <template>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Date Created</th>
-            <th>Date Modified</th>
-            <th>Flowcell</th>
-            <th>Lot</th>
-            <th>Expiration</th>
-            <th>Instrument</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="run in runs">
-            <td><router-link :to="{name: 'rundetail', params: {name:run.name}}">{{run.name}}</router-link></td>
-            <td>{{run.date_created | humanDatetime}}</td>
-            <td>{{run.date_modified | humanDatetime}}</td>
-            <td>{{run.flowcell}}</td>
-            <td>{{run.lot}}</td>
-            <td>{{run.expiration}}</td>
-            <td>{{run.instrument}}</td>
-        </tr>
-        </tbody>
-    </table>
+    <md-table>
+        <md-table-row>
+            <md-table-head>Name</md-table-head>
+            <md-table-head>Date Created</md-table-head>
+            <md-table-head>Date Modified</md-table-head>
+            <md-table-head>Flowcell</md-table-head>
+            <md-table-head>Lot</md-table-head>
+            <md-table-head>Expiration</md-table-head>
+            <md-table-head>Instrument</md-table-head>
+        </md-table-row>
+        <md-table-row v-for="run in runs" :key="run.id">
+            <md-table-cell><router-link :to="{name: 'rundetail', params: {name:run.name}}">{{run.name}}</router-link></md-table-cell>
+            <md-table-cell>{{run.date_created | humanDatetime}}</md-table-cell>
+            <md-table-cell>{{run.date_modified | humanDatetime}}</md-table-cell>
+            <md-table-cell>{{run.flowcell}}</md-table-cell>
+            <md-table-cell>{{run.lot}}</md-table-cell>
+            <md-table-cell>{{run.expiration}}</md-table-cell>
+            <md-table-cell>{{run.instrument}}</md-table-cell>
+        </md-table-row>
+    </md-table>
 </template>
 
 <script>
