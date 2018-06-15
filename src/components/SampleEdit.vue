@@ -76,7 +76,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {APIService} from '../http/APIService'
+const api = new APIService()
 import moment from 'moment'
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
@@ -99,36 +100,12 @@ export default {
         return moment(String(value)).format('MM/DD/YYYY hh:mm')
     }
   },
-  mounted () {
-    Promise.all([
-        axios.get('http://localhost:8000/bauer/sequencing/api/samples/' + this.$route.params.id + '/'),
-        axios.get('http://localhost:8000/bauer/sequencing/api/sample_types/')
-    ])
-    .then(([res_samples, res_sam_types]) => {
-                this.sample = res_samples.data
-                this.sample_types = res_sam_types.data
-
-    })
-    .then(() => {
-        return axios.get('http://localhost:8000/bauer/sequencing/api/runs/' + this.sample.run + '/')
-                .then(response => (this.run = response.data))
-                .catch(error => {
-                    console.log(error)
-                    this.errored = true
-                })
-    })
-    .finally(() => this.loading = false)
-    .catch(error => {
-        console.log(error)
-        this.errored = true
-    })
-  },
   methods: {
     save() {
         var msg = document.getElementById('message')
         var msgText = ''
         msg.innerHTML = ''
-        axios.put('http://localhost:8000/bauer/sequencing/api/samples/' + this.sample.id + '/', this.sample)
+        api.updateSample(this.sample.id, this.sample)
             .then(response => {
                 if (response.status == 200){
                     msgText = 'Successfully updated!'
@@ -145,6 +122,30 @@ export default {
                 this.errored = true
             })
     }
+  },
+  mounted () {
+    Promise.all([
+        api.getSample(this.$route.params.id),
+        api.getSampleTypes()
+    ])
+    .then(([res_samples, res_sam_types]) => {
+                this.sample = res_samples.data
+                this.sample_types = res_sam_types.data
+
+    })
+    .then(() => {
+        return api.getRun(this.sample.run)
+                .then(response => (this.run = response.data))
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true
+                })
+    })
+    .finally(() => this.loading = false)
+    .catch(error => {
+        console.log(error)
+        this.errored = true
+    })
   }
 }
 </script>

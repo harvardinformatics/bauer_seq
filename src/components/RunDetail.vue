@@ -46,7 +46,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {APIService} from '../http/APIService'
+const api = new APIService()
 import moment from 'moment'
 
 export default {
@@ -63,14 +64,18 @@ export default {
         return moment(String(value)).format('MM/DD/YYYY hh:mm')
     }
   },
+  methods: {
+    getRun(){
+        api.getRun(this.$route.params.name).then(response => (this.run = response.data))
+        .catch(error => {
+            console.log(error)
+            this.errored = true
+        })
+        .finally(() => this.loading = false)
+    }
+  },
   mounted () {
-    axios.get('http://localhost:8000/bauer/sequencing/api/runs/' + this.$route.params.name + '/')
-    .then(response => (this.run = response.data))
-    .catch(error => {
-        console.log(error)
-        this.errored = true
-    })
-    .finally(() => this.loading = false)
+    this.getRun()
   }
 }
 </script>

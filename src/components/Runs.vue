@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {APIService} from '../http/APIService'
+const api = new APIService()
 import moment from 'moment'
 
 export default {
@@ -37,14 +38,17 @@ export default {
         return moment(String(value)).format('MM/DD/YYYY hh:mm')
     }
   },
-  mounted () {
-    axios
-        .get('http://localhost:8000/bauer/sequencing/api/runs/')
-        .then(response => (this.runs = response.data))
+  methods: {
+    getRuns(){
+        api.getRuns().then(response => (this.runs = response.data))
         .catch(error => {
             console.log(error)
             this.errored = true
         })
+    }
+  },
+  mounted () {
+      this.getRuns()
   }
 }
 </script>
