@@ -68,7 +68,6 @@ export default {
   </div>
 
 </template>
-
 <style lang="scss" scoped>
 @import "./node_modules/vue-material/dist/theme/engine";
 @include md-register-theme('default', (
