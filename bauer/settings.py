@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import bauer.private_settings as priv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,7 +41,6 @@ INSTALLED_APPS = [
     'django_nose',
     'rest_framework',
     'rest_framework.authtoken',
-    'webpack_loader',
     'corsheaders'
 ]
 
@@ -65,7 +63,7 @@ ROOT_URLCONF = 'bauer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,7 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/bauer/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles/'), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'dist', 'static'), )
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -145,13 +143,6 @@ REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (
             'rest_framework.permissions.IsAuthenticated',
         )
-}
-
-WEBPACK_LOADER = {
-        'DEFAULT': {
-            'BUNDLE_DIR_NAME': '',
-            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
-        }
 }
 
 CORS_ORIGIN_ALLOW_ALL = False
