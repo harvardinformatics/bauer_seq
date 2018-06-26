@@ -14,9 +14,6 @@ export default class AuthService {
     getAuthToken() {
         const url = `${API_URL}get_auth_token/`
         console.log(process.env.BAUER_API_USERNAME)
-        return axios.post(url, {
-            username: 'username',
-            password: 'password'
-        })
+        return axios.post(url, CREDS)
     }
 }
