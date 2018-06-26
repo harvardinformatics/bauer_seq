@@ -5,6 +5,7 @@ from .models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, UpdateView
 from django.views.generic.edit import CreateView
+import logging
 
 class RequestList(ListView):
     model = Request
@@ -45,6 +46,7 @@ class SampleTypeCreate(generics.ListCreateAPIView):
         serializer.save()
 
 class RunCreate(generics.ListCreateAPIView):
+    logging.debug('testing')
     queryset = Run.objects.all()
     serializer_class = RunSerializer
 

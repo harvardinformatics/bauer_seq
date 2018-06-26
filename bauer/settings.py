@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'sequencing',
     'django.contrib.admin',
@@ -50,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'bauer.auth.RemoteUserPlusMiddleware',
+    #'bauer.auth.RemoteUserPlusMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -147,5 +148,30 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
+        'http//:localhost:8000',
+        'http//:localhost:8001',
         'http//:localhost:8080'
 )
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'console': {
+        'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': os.environ['BAUER_LOGLEVEL'],
+            'propagate': False,
+        },
+    },
+}

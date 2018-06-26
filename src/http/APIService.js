@@ -9,9 +9,8 @@ export class APIService {
     }
     getRuns() {
         const url = `${API_URL}runs/`
-        return this.auth.getAuthToken().then((response)=>{
-            return axios.get(url, {headers:{Authorization: `Token ${response.data.token}`}})
-        })
+        return axios.get(url)
+
     }
     getRun(name) {
         const url = `${API_URL}runs/${name}/`

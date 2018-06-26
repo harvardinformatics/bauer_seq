@@ -19,6 +19,9 @@ from django.conf.urls import url
 from rest_framework.authtoken import views
 from django.views.generic import TemplateView
 from bauer.views import vue_index
+import logging
+
+logging.debug('URLS')
 
 urlpatterns = [
     path('bauer/admin/', admin.site.urls),
