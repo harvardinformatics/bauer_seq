@@ -1,7 +1,7 @@
 import axios from 'axios'
 import AuthService from '../auth/AuthService'
 
-const API_URL = '/bauer/sequencing/api/'
+const API_URL = process.env.BAUER_DJANGO + 'sequencing/api/'
 
 export class APIService {
     constructor(){

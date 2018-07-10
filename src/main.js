@@ -19,10 +19,10 @@ new Vue({
   components: { App },
   template: '<App/>',
   http: {
-      root: 'http://localhost:8000/api',
-      headers: {
+      root: 'http://localhost:8000/api'
+      /*headers: {
           Authorization: 'Token 5fc35c10a694c960e6948102e3f08369d14271b6'
-      }
+      }*/
   },
   methods: {
     runs: function () {

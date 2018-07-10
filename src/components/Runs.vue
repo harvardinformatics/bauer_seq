@@ -63,8 +63,8 @@ export default {
         <v-data-table
         :headers="headers"
         :items="runs"
+        :loading="true"
         :search="search"
-        hide-actions
         class="elevation-1"
         >
         <template slot="items" slot-scope="props">

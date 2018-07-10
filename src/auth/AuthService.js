@@ -1,10 +1,9 @@
 import axios from 'axios'
 
-//const API_URL = process.env.BAUER_DJANGO + 'bauer/'
-const API_URL = '/bauer/'
+const API_URL = process.env.BAUER_DJANGO
 const CREDS = {
-    username: 'root',
-    password: 'ajk123'
+    username: process.env.BAUER_API_USERNAME,
+    password: process.env.BAUER_API_PASSWORD
 }
 
 export default class AuthService {
