@@ -21,7 +21,7 @@ new Vue({
   http: {
       root: 'http://localhost:8000/api',
       headers: {
-          Authorization: 'Token test'
+          Authorization: 'Token 5fc35c10a694c960e6948102e3f08369d14271b6'
       }
   },
   methods: {

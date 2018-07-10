@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     'django_nose',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,9 +55,7 @@ MIDDLEWARE = [
     #'bauer.auth.RemoteUserPlusMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.BrokenLinkEmailsMiddleware',
-    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'bauer.urls'
@@ -148,14 +147,15 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-        'http//:localhost:8000',
-        'http//:localhost:8001',
-        'http//:localhost:8080'
+        'localhost:8000',
+        'localhost:8001',
+        'localhost:8080',
+        'localhost:8989',
 )
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'console': {
         'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',

@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 //const API_URL = process.env.BAUER_DJANGO + 'bauer/'
-const API_URL = 'http://localhost:8000/bauer/'
+const API_URL = '/bauer/'
 const CREDS = {
-    username: process.env.BAUER_API_USERNAME,
-    password: process.env.BAUER_API_PASSWORD
+    username: 'root',
+    password: 'ajk123'
 }
 
 export default class AuthService {
@@ -13,7 +13,7 @@ export default class AuthService {
     }
     getAuthToken() {
         const url = `${API_URL}get_auth_token/`
-        console.log(process.env.BAUER_API_USERNAME)
+        //console.log(process.env.BAUER_API_USERNAME)
         return axios.post(url, CREDS)
     }
 }
