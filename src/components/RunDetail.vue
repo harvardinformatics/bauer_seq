@@ -1,50 +1,3 @@
-<template>
-<div>
-    <section v-if="loading">Loading...</section>
-    <section v-else>
-        <table>
-        <tbody>
-            <tr><td>Name</td><td>{{run.name}}</td></tr>
-            <tr><td>Date Created</td><td>{{run.date_created | humanDatetime}}</td></tr>
-            <tr><td>Date Modified</td><td>{{run.date_modified | humanDatetime}}</td></tr>
-            <tr><td>Flowcell</td><td>{{run.flowcell}}</td></tr>
-            <tr><td>Lot</td><td>{{run.lot}}</td></tr>
-            <tr><td>Expiration</td><td>{{run.expiration}}</td></tr>
-            <tr><td>Instrument</td><td>{{run.instrument}}</td></tr>
-        </tbody>
-        </table>
-
-        <h2>Samples</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Date Created</th>
-                <th>Date Modified</th>
-                <th>Description</th>
-                <th>Index 1</th>
-                <th>Index 2</th>
-                <th>Lane</th>
-                <th>Sample Type</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="sam in run.run_samples">
-            <td><router-link :to="{name: 'sampleedit', params: {id:sam.id}}">{{sam.name}}</router-link></td>
-            <td>{{sam.date_created | humanDatetime}}</td>
-            <td>{{sam.date_modified | humanDatetime}}</td>
-            <td>{{sam.description}}</td>
-            <td>{{sam.index1}}</td>
-            <td>{{sam.index2}}</td>
-            <td>{{sam.lane}}</td>
-            <td>{{sam.sample_type}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-    </div>
-</template>
-
 <script>
 import {APIService} from '../http/APIService'
 const api = new APIService()
@@ -56,7 +9,20 @@ export default {
       return {
           loading: true,
           errored: false,
-          run: null
+          run: null,
+          samples: [],
+          search: '',
+          headers: [
+            {text: "Name", align: "left", value: "name"},
+            {text: "Date Created", value: "date_created"},
+            {text: "Date Modified", value: "date_modified"},
+            {text: "Description", value: "description"},
+            {text: "Index 1", value: "index_1"},
+            {text: "Index 2", value: "index_2"},
+            {text: "Lane", value: "lane"},
+            {text: "Sample Type", value: "sample_type"},
+          ],
+          loading: true
       }
   },
   filters: {
@@ -66,7 +32,10 @@ export default {
   },
   methods: {
     getRun(){
-        api.getRun(this.$route.params.name).then(response => (this.run = response.data))
+        api.getRun(this.$route.params.name).then(response => {
+                this.run = response.data
+                this.samples = this.run.run_samples
+        })
         .catch(error => {
             console.log(error)
             this.errored = true
@@ -79,3 +48,57 @@ export default {
   }
 }
 </script>
+
+<template>
+<div>
+    <v-card>
+    <v-card-title>Run Detail</v-card-title>
+        <table>
+        <tbody>
+            <tr><td>Name</td><td>{{run.name}}</td></tr>
+            <tr><td>Date Created</td><td>{{run.date_created | humanDatetime}}</td></tr>
+            <tr><td>Date Modified</td><td>{{run.date_modified | humanDatetime}}</td></tr>
+            <tr><td>Flowcell</td><td>{{run.flowcell}}</td></tr>
+            <tr><td>Lot</td><td>{{run.lot}}</td></tr>
+            <tr><td>Expiration</td><td>{{run.expiration}}</td></tr>
+            <tr><td>Instrument</td><td>{{run.instrument}}</td></tr>
+        </tbody>
+        </table>
+    </v-card>
+    <v-card>
+    <v-card-title>
+        <h2>Samples</h2>
+        <v-spacer></v-spacer>
+        <v-text-field
+            v-modal="search"
+            label="Search"
+            single-line
+            hide-details
+        </v-text-field>
+    </v-card-title>
+    <v-data-table
+    :headers="headers"
+    :items="samples"
+    :loading="loading"
+    :search="search"
+    class="elevation-1"
+    >
+    <template slot="items" slot-scope="props">
+        <td><router-link :to="{name: 'sampleedit', params: {id:props.item.id}}">{{props.item.name}}</router-link></td>
+        <td>{{props.item.date_created | humanDatetime}}</td>
+        <td>{{props.item.date_modified | humanDatetime}}</td>
+        <td>{{props.item.description}}</td>
+        <td>{{props.item.index1}}</td>
+        <td>{{props.item.index2}}</td>
+        <td>{{props.item.lane}}</td>
+        <td>{{props.item.sample_type}}</td>
+    </template>
+    <v-alert slot="no-results" :value="true" color="error icon="warning">a
+        Your search for "{{search}}" found no results.
+    </v-alert>
+    </v-data-table>
+    </v-card>
+    </div>
+</template>
+
+

@@ -50,7 +50,7 @@
                     <div class="md-layout-item md-small-size-100">
                         <md-field>
                             <label for="sample_type">Sample Type</label>
-                            <md-select v-model="sample.sample_type" name="sample_type">
+                            <md-select v-model="sample.sample_type" name="sample_type" id="sample_type">
                                 <md-option v-for="sam_type in sample_types" :key="sam_type.id" :value="sam_type.id">{{sam_type.name}}</md-option>
                             </md-select>
                         </md-field>
