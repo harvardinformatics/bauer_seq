@@ -46,7 +46,6 @@ class SampleTypeCreate(generics.ListCreateAPIView):
         serializer.save()
 
 class RunCreate(generics.ListCreateAPIView):
-    logging.debug('testing')
     queryset = Run.objects.all()
     serializer_class = RunSerializer
 
