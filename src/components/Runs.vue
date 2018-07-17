@@ -58,7 +58,7 @@ export default {
 }
 </script>
 <template>
-    <div>
+    <v-app>
         <v-card>
             <v-card-title>
                 Runs
@@ -95,7 +95,7 @@ export default {
         </v-alert>
         </v-data-table>
         </v-card>
-    </div>
+    </v-app>
 </template>
 
 
