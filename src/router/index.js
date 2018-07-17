@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Runs from '@/components/Runs'
 import RunDetail from '@/components/RunDetail'
 import SampleEdit from '@/components/SampleEdit'
+import AuthService from '../auth/AuthService'
 
 Vue.use(Router)
 
@@ -10,7 +11,7 @@ const NotFoundComponent = {
     template: '<h1>Not Found</h1>'
 }
 
-export default new Router({
+const router = new Router({
   base: '/bauer/',
   mode: 'history',
   routes: [
@@ -22,3 +23,14 @@ export default new Router({
     {path: '/sample/:id', name: 'sampleedit', component: SampleEdit},
   ]
 })
+
+router.beforeEach((to, from, next) => {
+    var auth = new AuthService()
+    if (auth.isAuthenticated()) {
+        next()
+        return
+    }
+    return
+});
+
+export default router;

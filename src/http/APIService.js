@@ -9,32 +9,22 @@ export class APIService {
     }
     getRuns() {
         const url = `${API_URL}runs/`
-        return this.auth.getAuthToken().then((response)=>{
-            return axios.get(url, {headers:{Authorization: `Token ${response.data.token}`}})
-        })
+        return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
     }
     getRun(name) {
         const url = `${API_URL}runs/${name}/`
-        return this.auth.getAuthToken().then((response)=>{
-            return axios.get(url, {headers:{Authorization: `Token ${response.data.token}`}})
-        })
+        return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
     }
     getSample(id) {
         const url = `${API_URL}samples/${id}/`
-        return this.auth.getAuthToken().then((response)=>{
-            return axios.get(url, {headers:{Authorization: `Token ${response.data.token}`}})
-        })
+        return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
     }
     updateSample(id, sample) {
         const url = `${API_URL}samples/${id}/`
-        return this.auth.getAuthToken().then((response)=>{
-            return axios.put(url, sample, {headers:{Authorization: `Token ${response.data.token}`}})
-        })
+        return axios.put(url, sample, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
     }
     getSampleTypes() {
         const url = `${API_URL}sample_types/`
-        return this.auth.getAuthToken().then((response)=>{
-            return axios.get(url, {headers:{Authorization: `Token ${response.data.token}`}})
-        })
+        return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
     }
 }
