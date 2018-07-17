@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
-from rest_framework.authtoken import views
+from rest_framework.authtoken import views as auth_views
+from bauer import views
 from django.views.generic import TemplateView
 
 urlpatterns = [
     path('bauer/admin/', admin.site.urls),
     path('bauer/sequencing/', include('sequencing.urls')),
-    path('bauer/get_auth_token/', views.obtain_auth_token),
+    path('bauer/get_auth_token/', auth_views.obtain_auth_token),
+    path('bauer/get_remote_user_auth_token/', views.get_remote_user_auth_token),
     url(r'^.*$', TemplateView.as_view(template_name='index.html'))
 ]

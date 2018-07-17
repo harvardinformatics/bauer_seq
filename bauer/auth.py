@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth.middleware import RemoteUserMiddleware
 from django.core.exceptions import ImproperlyConfigured
+from rest_framework.authtoken.models import Token
 import logging, os
 from bauer.settings import DEBUG
 
@@ -28,6 +29,7 @@ class RemoteUserPlusMiddleware(RemoteUserMiddleware):
     # all uppercase and the addition of "HTTP_" prefix apply.
     header = "HTTP_HKEYMAIL"
     huid_header = "HTTP_X_REMOTE_USER"
+    header_dev = "HTTP_REMOTE_USER"
     force_logout_if_no_header = True
 
     def process_request(self, request):
@@ -44,6 +46,8 @@ class RemoteUserPlusMiddleware(RemoteUserMiddleware):
             if DEBUG and os.environ.get("IFX_REMOTE_USER"):
                 username    = os.environ.get("IFX_REMOTE_USER").strip()
                 huid        = os.environ.get("IFX_HUID").strip()
+            elif DEBUG and self.header_dev in request.META:
+                username    = request.META[self.header_dev]
             else:
                 username    = request.META[self.header]
                 huid        = request.META[self.huid_header]

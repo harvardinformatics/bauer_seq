@@ -9,6 +9,7 @@ RUN apt-get update -y && apt-get install -y \
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY etc/nginx.conf /etc/nginx/sites-available/default
 COPY etc/supervisor.conf /etc/supervisor/conf.d/app.conf
+COPY etc/.htpasswd /etc/nginx/.htpasswd
 
 WORKDIR /app
 
