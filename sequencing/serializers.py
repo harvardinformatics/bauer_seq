@@ -31,8 +31,8 @@ class RunSerializer(serializers.ModelSerializer):
     instrument = serializers.SlugRelatedField(slug_field = 'name',
             queryset=Instrument.objects.all())
     name = serializers.CharField(validators=[UniqueValidator(queryset=Run.objects.all())])
-    run_samples = SampleSerializer(many=True)
-    run_lanes = LaneSerializer(many=True)
+    run_samples = SampleSerializer(many=True, read_only=True)
+    run_lanes = LaneSerializer(many=True, read_only=True)
 
     class Meta:
         model = Run
