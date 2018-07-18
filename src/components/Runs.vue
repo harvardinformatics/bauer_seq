@@ -15,7 +15,7 @@ export default {
             sortBy: 'date_created',
             descending: true,
           },
-          rowsPerPageItems: [10, 50, 100, {"text":"$vuetify.dataIterator.rowsPerPageAll","value":-1}],
+          rowsPerPageItems: [10, 50, 100, {"text":"All","value":-1}],
           headers: [
             {
                 text: 'Name',

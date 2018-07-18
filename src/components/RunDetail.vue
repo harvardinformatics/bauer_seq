@@ -51,8 +51,14 @@ export default {
 
 <template>
 <v-app>
+  <v-container grid-list-xl>
+    <v-layout column>
+        <v-flex>
     <v-card>
-    <v-card-title>Run Detail</v-card-title>
+    <v-card-title><h2>Run Detail</h2></v-card-title>
+        <v-container>
+            <v-layout>
+                <v-flex>
         <table>
         <tbody>
             <tr><td>Name</td><td>{{run.name}}</td></tr>
@@ -64,7 +70,12 @@ export default {
             <tr><td>Instrument</td><td>{{run.instrument}}</td></tr>
         </tbody>
         </table>
+        </v-flex>
+        </v-layout>
+        </v-container>
     </v-card>
+    </v-flex>
+    <v-flex>
     <v-card>
     <v-card-title>
         <h2>Samples</h2>
@@ -98,6 +109,9 @@ export default {
     </v-alert>
     </v-data-table>
     </v-card>
+    </v-flex>
+    </v-layout>
+    </v-container>
     </v-app>
 </template>
 

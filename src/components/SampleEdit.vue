@@ -2,12 +2,13 @@
 <v-app>
     <section v-if="loading">Loading...</section>
     <section v-else>
-        <v-form>
             <v-card>
-                <v-card-title>
-                    <div>Sample</div>
-                </v-card-title>
 
+                <v-card-title>
+                    <h2>Sample</h2>
+                </v-card-title>
+            <v-container><v-layout><v-flex>
+                <v-form>
                 <v-text-field v-model="sample.name" label="name" required></v-text-field>
                 <v-text-field v-model="sample.run" label="run" required disabled></v-text-field>
                 <v-text-field v-model="sample.description" label="description"></v-text-field>
@@ -15,12 +16,13 @@
                 <v-text-field v-model="sample.index2" label="index 2"></v-text-field>
                 <v-select v-model="sample.sample_type" :items="sample_types" item-text="name" item-value="id" label="sample type"></v-select>
                 <v-select v-model="sample.lane" :items="run.run_lanes" item-text="number" item-value="id" label="lane"></v-select>
+        </v-form>
+            </v-flex></v-layout></v-container>
             <v-card-actions>
             <v-btn @click="save">Save</v-btn>
             </v-card-actions>
             </v-card>
             <v-snackbar v-model="saved">The sample {{sample.name}} {{msgText}}</v-snackbar>
-        </v-form>
     </section>
 </v-app>
 </template>
