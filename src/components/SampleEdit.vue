@@ -2,7 +2,6 @@
 <v-app>
     <section v-if="loading">Loading...</section>
     <section v-else>
-        <p id="message"></p>
         <v-form>
             <v-card>
                 <v-card-title>
@@ -20,7 +19,7 @@
             <v-btn @click="save">Save</v-btn>
             </v-card-actions>
             </v-card>
-            <v-snackbar v-model="saved">The sample {{sample.name}} was saved!</v-snackbar>
+            <v-snackbar v-model="saved">The sample {{sample.name}} {{msgText}}</v-snackbar>
         </v-form>
     </section>
 </v-app>
@@ -43,7 +42,8 @@ export default {
           sample: null,
           sample_types: null,
           run: null,
-          saved: false
+          saved: false,
+          msgText: ''
       }
   },
   filters: {
@@ -53,23 +53,18 @@ export default {
   },
   methods: {
     save() {
-        var msg = document.getElementById('message')
-        var msgText = ''
-        msg.innerHTML = ''
         api.updateSample(this.sample.id, this.sample)
             .then(response => {
                 if (response.status == 200){
-                    msgText = 'Successfully updated!'
+                    this.msgText = 'successfully updated!'
                     this.saved = true
                 } else {
-                    msgText = 'Failed to update ' + response.statsText
+                    this.msgText = 'failed to update ' + response.statsText
                 }
-                msg.innerHTML = msgText
             })
             .catch(error => {
                 console.log(error)
-                msgText = 'Failed to update ' + error
-                msg.innerHTML = msgText
+                this.msgText = 'failed to update ' + error
                 this.errored = true
             })
     }
