@@ -3,6 +3,7 @@ export default {
   name: 'App',
   data: function () {
     return {
+      drawer: null,
       menuVisible: true,
       expandSub: true
     }
@@ -16,52 +17,42 @@ export default {
 
 </script>
 <template>
-  <div id="app" class="page-container">
-    <md-app md-mode="reveal">
-      <md-app-toolbar class="md-primary" md-elevation="0">
-        <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
-          <md-icon>menu</md-icon>
-        </md-button>
-        <span class="md-title">Bauer Core Sequencing Center</span>
-      </md-app-toolbar>
-      <md-app-drawer :md-active.sync="menuVisible"  md-persistent="mini" >
-        <md-toolbar class="md-transparent" md-elevation="0">
-          <span>Navigation</span>
-          <div class="md-toolbar-section-end">
-            <md-button class="md-icon-button md-dense" @click="toggleMenu">
-              <md-icon>keyboard_arrow_left</md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>
-        <md-list>
-          <md-list-item md-expand md-expanded>
-            <md-icon>polymer</md-icon>
-            <span class="md-list-item-text">Bauer</span>
-            <md-list slot="md-expand">
-              <md-list-item to="/runs">
-                <span class="md-list-item-text">Runs</span>
-              </md-list-item>
-            </md-list>
-          </md-list-item>
-        </md-list>
-      </md-app-drawer>
-      <md-app-content>
-
-    <router-view/>
-      </md-app-content>
-    </md-app>
-  </div>
-
+  <v-app id="inspire">
+      <v-navigation-drawer v-model="drawer" fixed app>
+        <v-list dense>
+        <v-list-tile :to="{name:'runs'}">
+            <v-list-tile-action>
+                <v-icon>home</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+                <v-list-tile-title>
+                    Home
+                </v-list-tile-title>
+            </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile :to="{name:'runs'}">
+            <v-list-tile-action>
+                <v-icon>polymer</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+                <v-list-tile-title>
+                    Runs
+                </v-list-tile-title>
+            </v-list-tile-content>
+        </v-list-tile>
+        </v-list>
+    </v-navigation-drawer>
+    <v-toolbar color="primary" fixed app>
+        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-title>Bauer Sequencing Core</v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+        <v-container fluid>
+            <router-view></router-view>
+        </v-container>
+    </v-content>
+    <v-footer color="secondary" app>
+        <span class="white--text">2018 The Presidents and Fellows of Harvard College.</span>
+    </v-footer>
+  </v-app>
 </template>
-<style lang="scss" scoped>
-@import "./node_modules/vue-material/dist/theme/engine";
-@include md-register-theme('default', (
-    primary: md-get-palette-color(bluegrey, A200), // primary color
-    accent: md-get-palette-color(grey, A200) // secondary color
-));
-@import "~vue-material/dist/components/MdButton/theme"; // Apply the Button
-@import "~vue-material/dist/components/MdContent/theme"; // Apply the Content
-@import "~vue-material/dist/components/MdToolbar/theme";
-
-@import "~vue-material/dist/theme/all";
-</style>

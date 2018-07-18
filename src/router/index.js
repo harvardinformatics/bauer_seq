@@ -18,7 +18,7 @@ const router = new Router({
     {path: '/404', component: NotFoundComponent},
     {path: '*', redirect: '/404'},
     {path: '/', redirect: '/runs'},
-    {path: '/runs', name: 'Runs', component: Runs},
+    {path: '/runs', name: 'runs', component: Runs},
     {path: '/run/:name', name: 'rundetail', component: RunDetail},
     {path: '/sample/:id', name: 'sampleedit', component: SampleEdit},
   ]

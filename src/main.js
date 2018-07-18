@@ -5,9 +5,17 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import colors from 'vuetify/es5/util/colors'
 
 Vue.config.productionTip = false
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+    theme: {
+        primary: '#78909C',
+        secondary: colors.grey.base,
+        accent: colors.shades.black,
+        error: colors.red.accent3
+    }
+})
 
 /* eslint-disable no-new */
 new Vue({
