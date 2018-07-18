@@ -21,8 +21,7 @@ export default {
             {text: "Index 2", value: "index_2"},
             {text: "Lane", value: "lane"},
             {text: "Sample Type", value: "sample_type"},
-          ],
-          loading: true
+          ]
       }
   },
   filters: {
@@ -51,6 +50,8 @@ export default {
 
 <template>
 <v-app>
+    <section v-if="loading">Loading...</section>
+    <section v-else>
   <v-container grid-list-xl>
     <v-layout column>
         <v-flex>
@@ -112,6 +113,7 @@ export default {
     </v-flex>
     </v-layout>
     </v-container>
+    </section>
     </v-app>
 </template>
 
