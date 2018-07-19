@@ -22,19 +22,24 @@ export default class AuthService {
         this.setAuthHeaderValue()
         console.log('header vaule is now ' + this.getAuthHeaderValue())
     }
+    fetchToken() {
+        var url = `${API_URL}get_remote_user_auth_token/`
+        return axios.get(url).then((response)=> {
+            var token = response.data.token
+            if (token) {
+                this.setAuthToken(token)
+                return token
+            }
+            return ''
+        })
+    }
     getAuthToken () {
         var token = sessionStorage.getItem(this.authTokenKey)
         if (token) {
             return token
         } else {
-            var url = `${API_URL}get_remote_user_auth_token/`
-            return axios.get(url).then((response)=> {
-                var token = response.data.token
-                if (token) {
-                    this.setAuthToken(token)
-                    return token
-                }
-                return ''
+            this.fetchToken().then((token)=> {
+                return token
             })
         }
     }

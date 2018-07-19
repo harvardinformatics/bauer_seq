@@ -44,17 +44,19 @@ class RemoteUserPlusMiddleware(RemoteUserMiddleware):
         try:
             logger.debug("Checking header for REMOTE_USER")
             if DEBUG and os.environ.get("IFX_REMOTE_USER"):
+                logger.debug('ifx remote user')
                 username    = os.environ.get("IFX_REMOTE_USER").strip()
                 huid        = os.environ.get("IFX_HUID").strip()
             elif DEBUG and self.header_dev in request.META:
+                logger.debug('dev header found')
                 username    = request.META[self.header_dev]
             else:
+                logger.debug('looking for prod header')
                 username    = request.META[self.header]
-                huid        = request.META[self.huid_header]
+                huid    = request.META[self.huid_header]
             logger.debug("User %s logged in" % username)
-            for k, v in request.META.items():
-                if 'HKEY' in k:
-                    logger.debug("%s = %s" % (k, v))
+            #for k, v in request.META.items():
+            #    logger.debug("%s = %s" % (k, v))
         except KeyError:
             # If specified header doesn't exist then remove any existing
             # authenticated remote-user, or return (leaving request.user set to
@@ -85,3 +87,5 @@ class RemoteUserPlusMiddleware(RemoteUserMiddleware):
             # by logging the user in.
             request.user = user
             auth.login(request, user)
+            Token.objects.get_or_create(user=user)
+

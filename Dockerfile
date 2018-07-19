@@ -2,6 +2,7 @@ FROM python:3.6
 
 EXPOSE 80
 RUN apt-get update -y && apt-get install -y \
+    vim \
     nginx \
     sendmail \
     supervisor
