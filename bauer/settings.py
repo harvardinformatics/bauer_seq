@@ -170,7 +170,7 @@ LOGGING = {
     'loggers': {
         '': {
             'handlers': ['console'],
-            'level': os.environ['BAUER_LOGLEVEL'],
+            'level': os.environ.get('BAUER_LOGLEVEL', 'DEBUG'),
             'propagate': False,
         },
     },
