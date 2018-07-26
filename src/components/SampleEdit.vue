@@ -79,6 +79,12 @@ export default {
     .then(([res_samples, res_sam_types]) => {
                 this.sample = res_samples.data
                 this.sample_types = res_sam_types.data
+                var sample_type_names = []
+                var len_sample_types = this.sample_types.length;
+                for (var i=0; i < len_sample_types; i++) {
+                    sample_type_names.push(this.sample_types[i]['name'])
+                }
+                this.sample_types = sample_type_names
 
     })
     .then(() => {

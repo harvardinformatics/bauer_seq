@@ -15,6 +15,8 @@ class SampleTypeSerializer(serializers.ModelSerializer):
 class SampleSerializer(serializers.ModelSerializer):
     run = serializers.SlugRelatedField(slug_field = 'name',
             queryset=Run.objects.all(), required = False)
+    sample_type = serializers.SlugRelatedField(slug_field = 'name',
+            queryset=SampleType.objects.all(), required = False)
 
     class Meta:
         model = Sample
