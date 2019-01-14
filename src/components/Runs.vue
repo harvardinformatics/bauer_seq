@@ -28,7 +28,8 @@ export default {
             { text: 'Flowcell', value: 'flowcell'},
             { text: 'Lot', value: 'lot'},
             { text: 'Expiration', value: 'expiration'},
-            { text: 'Instrument', value: 'instrument'}
+            { text: 'Instrument', value: 'instrument'},
+            { text: 'Sample Types', value: 'sample_types'}
         ]
       }
   },
@@ -36,6 +37,8 @@ export default {
     humanDatetime (value) {
         return moment(String(value)).format('MM/DD/YYYY hh:mm')
     }
+  },
+  computed: {
   },
   methods: {
     getRuns(){
@@ -49,6 +52,13 @@ export default {
             console.log(error)
             this.errored = true
         })
+    },
+    get_sample_type_list: function(samples){
+        var lst = new Set()
+        for (var key in samples) {
+            lst.add(samples[key]['sample_type'])
+        }
+        return Array.from(lst).join(', ')
     }
   },
   mounted () {
@@ -89,6 +99,7 @@ export default {
             <td>{{props.item.lot}}</td>
             <td>{{props.item.expiration}}</td>
             <td>{{props.item.instrument}}</td>
+            <td>{{get_sample_type_list(props.item.run_samples)}}</td>
         </template>
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
             Your search for "{{search}}" found no results.
