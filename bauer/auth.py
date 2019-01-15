@@ -27,7 +27,7 @@ class RemoteUserPlusMiddleware(RemoteUserMiddleware):
     # Name of request header to grab username from.  This will be the key as
     # used in the request.META dictionary, i.e. the normalization of headers to
     # all uppercase and the addition of "HTTP_" prefix apply.
-    header = "HTTP_HKEYMAIL"
+    header = "HTTP_HKEY_MAIL"
     huid_header = "HTTP_X_REMOTE_USER"
     header_dev = "HTTP_REMOTE_USER"
     force_logout_if_no_header = True
