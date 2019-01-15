@@ -46,7 +46,7 @@ class SampleTypeCreate(generics.ListCreateAPIView):
         serializer.save()
 
 class RunCreate(generics.ListCreateAPIView):
-    queryset = Run.objects.all()
+    queryset = Run.objects.all().prefetch_related('run_samples__sample_type')
     serializer_class = RunSerializer
 
     def perform_create(self, serializer):

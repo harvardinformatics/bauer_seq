@@ -27,14 +27,11 @@ class SampleSerializer(serializers.ModelSerializer):
         read_only_fields = ('date_created', 'date_modified')
 
 class SampleTypeListSerializer(serializers.ModelSerializer):
-    #sample_type = serializers.SlugRelatedField(slug_field = 'name',
-    #        queryset=SampleType.objects.all(), required = False)
     sample_type = serializers.StringRelatedField()
 
     class Meta:
         model = Sample
         fields = ['sample_type']
-        read_only_fields = ('date_created', 'date_modified')
 
 class LaneSerializer(serializers.ModelSerializer):
     class Meta:
