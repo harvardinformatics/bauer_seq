@@ -76,7 +76,7 @@ class RequestSerializer(serializers.ModelSerializer):
             queryset=Status.objects.all(), required = False)
     class Meta:
         model = Request
-        fields = ('id', 'run', 'start_after', 'status', 'requestor', 'step')
+        fields = ('id', 'run', 'start_after', 'date_created', 'date_modified', 'status', 'requestor', 'step')
         read_only_fields = ('date_created', 'date_modified')
 
 class AnalysisSerializer(serializers.ModelSerializer):

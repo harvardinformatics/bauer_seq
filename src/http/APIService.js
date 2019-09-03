@@ -27,4 +27,8 @@ export class APIService {
         const url = `${API_URL}sample_types/`
         return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
     }
+    getRequests() {
+        const url = `${API_URL}requests/`
+        return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
+    }
 }

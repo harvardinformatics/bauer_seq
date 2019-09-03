@@ -20,7 +20,7 @@ export default {
   <v-app id="inspire">
       <v-navigation-drawer v-model="drawer" fixed app>
         <v-list dense>
-        <v-list-tile :to="{name:'runs'}">
+        <v-list-tile :to="{name:'analysis'}">
             <v-list-tile-action>
                 <v-icon>home</v-icon>
             </v-list-tile-action>
@@ -37,6 +37,16 @@ export default {
             <v-list-tile-content>
                 <v-list-tile-title>
                     Runs
+                </v-list-tile-title>
+            </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile :to="{name:'analysis'}">
+            <v-list-tile-action>
+                <v-icon>input</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+                <v-list-tile-title>
+                    Analysis
                 </v-list-tile-title>
             </v-list-tile-content>
         </v-list-tile>
