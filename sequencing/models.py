@@ -75,6 +75,9 @@ class Request(models.Model):
     date_modified = models.DateTimeField(auto_now = True)
     start_after = models.DateTimeField(auto_now = True)
     status = models.ForeignKey('Status', on_delete = models.PROTECT)
+    step = models.CharField(max_length = 100, choices = (('demultiplex', 'demultiplex'),
+        ('quality', 'quality'), ('count', 'count'), ('publish',
+            'publish')), blank = True, null = True)
     requestor = models.CharField(max_length=100, blank = True, null = True)
 
     def get_absolute_url(self):

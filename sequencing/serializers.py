@@ -70,9 +70,13 @@ class ReadSerializer(serializers.ModelSerializer):
         fields = ('id', 'number', 'run', 'length', 'indexed')
 
 class RequestSerializer(serializers.ModelSerializer):
+    run = serializers.SlugRelatedField(slug_field = 'name',
+            queryset=Run.objects.all(), required = False)
+    status = serializers.SlugRelatedField(slug_field = 'name',
+            queryset=Status.objects.all(), required = False)
     class Meta:
         model = Request
-        fields = ('id', 'run', 'start_after', 'status', 'requestor')
+        fields = ('id', 'run', 'start_after', 'status', 'requestor', 'step')
         read_only_fields = ('date_created', 'date_modified')
 
 class AnalysisSerializer(serializers.ModelSerializer):
