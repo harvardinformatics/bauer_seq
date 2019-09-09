@@ -1,0 +1,54 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Login from '@/components/Login'
+import Runs from '@/components/Runs'
+import Analysis from '@/components/Analysis'
+import RunDetail from '@/components/RunDetail'
+import SampleEdit from '@/components/SampleEdit'
+import NotFound from '@/components/NotFound'
+import auth from '@/auth'
+
+
+
+Vue.use(Router)
+
+const router = new Router({
+  base: '/bauer/',
+  mode: 'history',
+  routes: [
+    {
+      path: '/login/',
+      name: 'Login',
+      component: Login,
+      pathToRegexpOptions: {strict: true}
+    },
+    {
+      path: '/',
+      redirect: '/analysis'
+    },
+    {
+      path: '/analysis',
+      name: 'analysis',
+      component: Analysis,
+      pathToRegexpOptions: {strict: true},
+      beforeEnter: (to, from, next) => {
+        if (auth.isAuthenticated()) {
+          next()
+          return
+        }
+        next({name: 'Login', query: {from: window.location.pathname}})
+      }
+    },
+    {
+      path: '/404',
+      name: 'NotFound',
+      component: NotFound
+    },
+    {
+        path: '*',
+        redirect: '/404'
+    }
+  ]
+})
+
+export default router

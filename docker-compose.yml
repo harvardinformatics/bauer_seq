@@ -1,10 +1,58 @@
 version: '3'
 
 services:
-    web:
-        build: .
-        command: python3 manage.py runserver 0.0.0.0:8000
-        volumes:
-            - .:/code
-        ports:
-            - "8000:8000"
+  testsmtp:
+    image: mailhog/mailhog
+    command: ["-smtp-bind-addr", "0.0.0.0:25"]
+    user: root
+    expose:
+      - 25
+      - 8025
+    ports:
+      - 8025:8025
+  db:
+    image: mariadb
+    volumes:
+      - bauer-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=bauer
+      - MYSQL_DATABASE=bauer
+      - MYSQL_USER=bauer
+      - MYSQL_PASSWORD=bauer
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile-ui
+    depends_on:
+      - drf
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
+  drf:
+    build:
+      context: .
+      dockerfile: Dockerfile-drf
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    links:
+      - db
+      - testsmtp
+    ports:
+      - 8099:8000
+    environment:
+      - BAUER_IFX_APP_TOKEN=52b28b781722283740d228ce311a487227ec26a4
+      - BAUER_USERNAME=bauer
+      - BAUER_PASSWORD=bauer
+      - BAUER_DATABASE=bauer
+      - BAUER_HOSTNAME=db
+      - BAUER_LOGLEVEL=DEBUG
+      - BAUER_DEBUG=TRUE
+      - BAUER_DJANGO_KEY=akjdkwifheilskeit8n99f0k2nvi02ld0
+      - SMTP_SERVER=testsmtp
+      - IFX_REMOTE_USER=veradmin
+
+volumes:
+  bauer-data:

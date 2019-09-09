@@ -1,7 +1,7 @@
-"""bauer URL Configuration
+"""ifxdjango URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.0/topics/http/urls/
+    https://docs.djangoproject.com/en/2.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -14,16 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from django.conf.urls import url
-from rest_framework.authtoken import views as auth_views
-from bauer import views
-from django.views.generic import TemplateView
+from django.urls import path
+from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
+from rest_framework import routers
+from bauer import settings
+from bauer.views import get_remote_user_auth_token
 
-urlpatterns = [
-    path('bauer/admin/', admin.site.urls),
-    path('bauer/sequencing/', include('sequencing.urls')),
-    path('bauer/get_auth_token/', auth_views.obtain_auth_token),
-    path('bauer/get_remote_user_auth_token/', views.get_remote_user_auth_token),
-    url(r'^.*$', TemplateView.as_view(template_name='index.html'))
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
+    path(r'bauer/djadmin/', admin.site.urls),
+    path(r'bauer/api/sequencing/', include('sequencing.urls')),
+    path(r'bauer/api/djvocab', include('djvocab.urls')),
+    path(r'bauer/api/obtain-auth-token/', get_remote_user_auth_token),
+    url(r'^bauer/.*$', TemplateView.as_view(template_name="index.html")),
 ]
