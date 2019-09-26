@@ -23,7 +23,7 @@ RUN pip install --upgrade pip && \
     pip install git+https://github.com/harvardinformatics/djvocab.git@a0cfeba93ea805d3861e97e9c38fd27447e5b58a && \
     pip install git+https://github.com/harvardinformatics/ifxurls.git@72f75b3fcc9446fc5095ad747b3ed53d05bc4799 && \
     pip install git+https://github.com/harvardinformatics/ifxuser.git@701eec94d06e83fcb42416b9fb07255569c4c2c4 && \
-    pip install git+https://github.com/harvardinformatics/ifxauth.git@afcaad2b05f5dd90e86e53b2de864bef04c91898 && \
+    pip install git+https://github.com/harvardinformatics/ifxauth.git@d184b09de3159c1d437171262f30d7f20c9b174c && \
     pip install git+https://github.com/harvardinformatics/ifxmail.client.git@b649c6ed9edfa7cae5a402485e689fcaf1e3dc86 && \
     pip install -r requirements.txt
 
