@@ -84,7 +84,7 @@ export default {
         >
         <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
         <template slot="items" slot-scope="props">
-            <td class="md-table-cell"><router-link :to="{run: 'rundetail', params: {run:props.item.run}}">{{props.item.run}}</router-link></td>
+            <td class="md-table-cell"><router-link :to="{name: 'rundetail', params: {name:props.item.run}}">{{props.item.run}}</router-link></td>
             <td class="md-table-cell">{{props.item.date_created | humanDatetime}}</td>
             <td class="md-table-cell">{{props.item.date_modified | humanDatetime}}</td>
             <td>{{props.item.status}}</td>
