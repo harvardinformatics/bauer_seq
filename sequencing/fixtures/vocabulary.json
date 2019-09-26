@@ -1,0 +1,162 @@
+[
+    {
+        "model": "djvocab.vocabulary",
+        "pk":1,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "genomic",
+            "description": "",
+            "order": 1
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk":2,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "RRBS",
+            "description": "",
+            "order": 2
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 3,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "10x genome",
+            "description": "",
+            "order": 3
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 4,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "10x single cell RNA",
+            "description": "",
+            "order": 4
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 5,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "indrop v2",
+            "description": "",
+            "order": 5
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 6,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "RNA-seq",
+            "description": "",
+            "order": 6
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 7,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "ATAC-seq",
+            "description": "",
+            "order": 7
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 8,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "ChIP-seq",
+            "description": "",
+            "order": 8
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 9,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "RAD-seq",
+            "description": "",
+            "order": 9
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 10,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "amplicon",
+            "description": "",
+            "order": 10
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 11,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "shotgun metagenomics",
+            "description": "",
+            "order": 11
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 12,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "indrop v3",
+            "description": "",
+            "order": 12
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 13,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "10x single cell ATAC",
+            "description": "",
+            "order": 13
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 14,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "10x single cell nuclei RNA",
+            "description": "",
+            "order": 14
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 15,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "10x single cell vdj",
+            "description": "",
+            "order": 15
+        }
+    },
+    {
+        "model": "djvocab.vocabulary",
+        "pk": 16,
+        "fields": {
+            "key": "sample.sample_type",
+            "value": "other",
+            "description": "",
+            "order": 16
+        }
+    }
+]

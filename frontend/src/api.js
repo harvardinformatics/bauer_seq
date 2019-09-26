@@ -1,6 +1,6 @@
 import axios from 'axios'
 import auth from './auth'
-import { SEQUENCING_API } from '@/urls'
+import { API_ROOT, SEQUENCING_API } from '@/urls'
 
 
 export class APIService {
@@ -9,6 +9,10 @@ export class APIService {
     }
     getRuns() {
         const url = `${SEQUENCING_API}runs/`
+        return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
+    }
+    getRunList() {
+        const url = `${SEQUENCING_API}run_list/`
         return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
     }
     getRun(name) {
@@ -29,6 +33,10 @@ export class APIService {
     }
     getRequests() {
         const url = `${SEQUENCING_API}requests/`
+        return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
+    }
+    getChoices(field) {
+        const url = `${API_ROOT}djvocab/vocabularies/?field=${field}`
         return axios.get(url, {headers:{Authorization: `${this.auth.getAuthHeaderValue()}`}})
     }
 }

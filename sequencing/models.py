@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from djvocab import getChoices
 
 # Create your models here.
 class Instrument(models.Model):
@@ -7,14 +8,6 @@ class Instrument(models.Model):
     type = models.CharField(max_length=100,
             choices = (('nextseq', 'nextseq'), ('hiseq', 'hiseq')),
             default = 'nextseq')
-
-class SampleType(models.Model):
-    name = models.CharField(max_length=100)
-    class Meta:
-        db_table = 'sequencing_sample_type'
-
-    def __str__(self):
-        return self.name
 
 class Run(models.Model):
     name = models.CharField(max_length=100)
@@ -47,8 +40,7 @@ class Sample(models.Model):
     description = models.CharField(max_length=100)
     index1 = models.CharField(max_length=50, blank = True, null = True)
     index2 = models.CharField(max_length=50, blank = True, null = True)
-    sample_type = models.ForeignKey('SampleType', on_delete = models.PROTECT,
-            null=True)
+    sample_type = models.CharField(max_length=100, choices=((v.value, v.value) for v in getChoices('sample.sample_type')), blank = True, null = True)
 
     def get_absolute_url(self):
         return reverse('sample_detail', kwargs={'pk': self.pk})

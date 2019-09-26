@@ -5,6 +5,7 @@ from .models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, UpdateView
 from django.views.generic.edit import CreateView
+from django.db.models import Aggregate, CharField
 import logging
 
 class RequestList(ListView):
@@ -34,13 +35,6 @@ class RunDetail(DetailView):
 class InstrumentCreate(generics.ListCreateAPIView):
     queryset = Instrument.objects.all()
     serializer_class = InstrumentSerializer
-
-    def perform_create(self, serializer):
-        serializer.save()
-
-class SampleTypeCreate(generics.ListCreateAPIView):
-    queryset = SampleType.objects.all()
-    serializer_class = SampleTypeSerializer
 
     def perform_create(self, serializer):
         serializer.save()
@@ -122,3 +116,20 @@ class Bcl2fastqSampleAnalysisCreate(generics.ListCreateAPIView):
 class Bcl2fastqSampleAnalysisMod(generics.RetrieveUpdateDestroyAPIView):
     queryset = Bcl2fastqSampleAnalysis.objects.all()
     serializer_class = Bcl2fastqSampleAnalysisSerializer
+
+class GroupConcat(Aggregate):
+    function = 'GROUP_CONCAT'
+    template = '%(function)s(%(distinct)s%(expressions)s%(separator)s)'
+    allow_distinct = True
+
+    def __init__(self, expression, distinct=False, separator=None, **extra):
+        output_field = extra.pop('output_field', CharField())
+        distinct = 'DISTINCT ' if distinct else ''
+        separator = " SEPARATOR '{}'".format(separator) if separator is not None else ''
+        super(GroupConcat, self).__init__(
+        expression, separator=separator, distinct=distinct, output_field=output_field, **extra)
+
+
+class RunList(generics.ListAPIView):
+    queryset = Run.objects.annotate(sample_types=GroupConcat('run_samples__sample_type', ', '))
+    serializer_class = RunListSerializer

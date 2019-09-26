@@ -74,15 +74,17 @@ export default {
   mounted () {
     Promise.all([
         api.getSample(this.$route.params.id),
-        api.getSampleTypes()
+        api.getChoices('sample.sample_type')
     ])
     .then(([res_samples, res_sam_types]) => {
                 this.sample = res_samples.data
                 this.sample_types = res_sam_types.data
+                console.log('test')
+                console.log(this.sample_types)
                 var sample_type_names = []
                 var len_sample_types = this.sample_types.length;
                 for (var i=0; i < len_sample_types; i++) {
-                    sample_type_names.push(this.sample_types[i]['name'])
+                    sample_type_names.push(this.sample_types[i]['value'])
                 }
                 this.sample_types = sample_type_names
 

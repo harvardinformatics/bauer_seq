@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     getRuns(){
-        api.getRuns().then(
+        api.getRunList().then(
                 response => {
                     this.runs = response.data
                     this.loading = false
@@ -52,19 +52,11 @@ export default {
             console.log(error)
             this.errored = true
         })
-    },
-    get_sample_type_list: function(samples){
-        var lst = new Set()
-        for (var key in samples) {
-            lst.add(samples[key]['sample_type'])
-        }
-        return Array.from(lst).join(', ')
     }
   },
   mounted () {
       this.getRuns()
-  },
-  components: {ModuleDatatable}
+  }
 }
 </script>
 <template>
@@ -99,7 +91,7 @@ export default {
             <td>{{props.item.lot}}</td>
             <td>{{props.item.expiration}}</td>
             <td>{{props.item.instrument}}</td>
-            <td>{{get_sample_type_list(props.item.run_samples)}}</td>
+            <td>{{props.item.sample_types}}</td>
         </template>
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
             Your search for "{{search}}" found no results.

@@ -7,31 +7,15 @@ class InstrumentSerializer(serializers.ModelSerializer):
         model = Instrument
         fields = ('id', 'name', 'type')
 
-class SampleTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SampleType
-        fields = ('id', 'name')
-    def __unicode__(self):
-        return '%s' % self.name
-
 class SampleSerializer(serializers.ModelSerializer):
     run = serializers.SlugRelatedField(slug_field = 'name',
             queryset=Run.objects.all(), required = False)
-    sample_type = serializers.SlugRelatedField(slug_field = 'name',
-            queryset=SampleType.objects.all(), required = False)
 
     class Meta:
         model = Sample
         fields = ('id', 'date_modified', 'date_created', 'name', 'run', 'lane', 'description', 'index1',
         'index2', 'sample_type')
         read_only_fields = ('date_created', 'date_modified')
-
-class SampleTypeListSerializer(serializers.ModelSerializer):
-    sample_type = serializers.StringRelatedField()
-
-    class Meta:
-        model = Sample
-        fields = ['sample_type']
 
 class LaneSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,7 +26,7 @@ class RunSerializer(serializers.ModelSerializer):
     instrument = serializers.SlugRelatedField(slug_field = 'name',
             queryset=Instrument.objects.all())
     name = serializers.CharField(validators=[UniqueValidator(queryset=Run.objects.all())])
-    run_samples = SampleTypeListSerializer(many=True, read_only=True)
+    run_samples = SampleSerializer(many=True, read_only=True)
     run_lanes = LaneSerializer(many=True, read_only=True)
 
     class Meta:
@@ -50,6 +34,17 @@ class RunSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'flowcell', 'lot', 'expiration', 'instrument',
         'date_created', 'date_modified', 'run_samples', 'run_lanes')
         read_only_fields = ('date_created', 'date_modified')
+
+class RunListSerializer(serializers.Serializer):
+    instrument = serializers.SlugRelatedField(slug_field = 'name',
+            queryset=Instrument.objects.all())
+    name = serializers.CharField(validators=[UniqueValidator(queryset=Run.objects.all())])
+    sample_types = serializers.CharField()
+    flowcell = serializers.CharField()
+    lot = serializers.CharField()
+    expiration = serializers.CharField()
+    date_created = serializers.DateTimeField()
+    date_modified = serializers.DateTimeField()
 
 class RunModSerializer(serializers.ModelSerializer):
     instrument = serializers.SlugRelatedField(slug_field = 'name',
@@ -91,3 +86,5 @@ class Bcl2fastqSampleAnalysisSerializer(serializers.ModelSerializer):
         model = Bcl2fastqSampleAnalysis
         fields = ('id', 'analysis', 'sample', 'q30', 'cluster')
         read_only_fields = ('date_created', 'date_modified')
+
+
