@@ -8,7 +8,7 @@ SPHINXAPIDOC  = sphinx-apidoc
 SOURCEDIR     = docs/src
 BUILDDIR      = docs/build
 
-PRODIMAGE     = harvardinformatics/p3:latest
+PRODIMAGE     = harvardinformatics/bauer:latest
 PRODBUILDARGS = --ssh default
 
 DEVDRFIMAGE   = bauer-drf
