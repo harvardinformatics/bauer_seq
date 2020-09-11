@@ -38,8 +38,8 @@ class Sample(models.Model):
     date_created = models.DateTimeField(auto_now_add = True)
     date_modified = models.DateTimeField(auto_now = True)
     description = models.CharField(max_length=100)
-    index1 = models.CharField(max_length=50, blank = True, null = True)
-    index2 = models.CharField(max_length=50, blank = True, null = True)
+    index1 = models.CharField(max_length=100, blank = True, null = True)
+    index2 = models.CharField(max_length=100, blank = True, null = True)
     sample_type = models.CharField(max_length=100, choices=((v.value, v.value) for v in getChoices('sample.sample_type')), blank = True, null = True)
 
     def get_absolute_url(self):

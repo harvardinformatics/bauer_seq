@@ -55,8 +55,7 @@ export default {
   },
   mounted () {
       this.getRequests()
-  },
-  components: {ModuleDatatable}
+  }
 }
 </script>
 <template>

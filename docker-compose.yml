@@ -10,7 +10,7 @@ services:
       - 8025
     ports:
       - 8025:8025
-  db:
+  bauer-db:
     image: mariadb
     volumes:
       - bauer-data:/var/lib/mysql
@@ -19,35 +19,33 @@ services:
       - MYSQL_DATABASE=bauer
       - MYSQL_USER=bauer
       - MYSQL_PASSWORD=bauer
-  ui:
+  bauer-ui:
     build:
       context: .
       dockerfile: Dockerfile-ui
     depends_on:
-      - drf
+      - bauer-drf
     volumes:
       - .:/app
     ports:
       - 8080:8080
-  drf:
-    build:
-      context: .
-      dockerfile: Dockerfile-drf
+  bauer-drf:
+    image: bauer-drf
     depends_on:
-      - db
+      - bauer-db
     volumes:
       - .:/app
     links:
-      - db
+      - bauer-db
       - testsmtp
     ports:
-      - 8099:8000
+      - 8099:80
     environment:
       - BAUER_IFX_APP_TOKEN=52b28b781722283740d228ce311a487227ec26a4
       - BAUER_USERNAME=bauer
       - BAUER_PASSWORD=bauer
       - BAUER_DATABASE=bauer
-      - BAUER_HOSTNAME=db
+      - BAUER_HOSTNAME=bauer-db
       - BAUER_LOGLEVEL=DEBUG
       - BAUER_DEBUG=TRUE
       - BAUER_DJANGO_KEY=akjdkwifheilskeit8n99f0k2nvi02ld0
