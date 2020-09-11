@@ -86,6 +86,7 @@ export default {
             label="Search"
             single-line
             hide-details
+        >
         </v-text-field>
     </v-card-title>
     <v-data-table
@@ -105,7 +106,7 @@ export default {
         <td>{{props.item.lane}}</td>
         <td>{{props.item.sample_type}}</td>
     </template>
-    <v-alert slot="no-results" :value="true" color="error icon="warning">a
+    <v-alert slot="no-results" :value="true" color="error" icon="warning">
         Your search for "{{search}}" found no results.
     </v-alert>
     </v-data-table>
